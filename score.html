@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Your IT Skill Score</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+<div class="score-container">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <h1>Your IT Skill Score</h1>
+
+    <div class="score-number">
+
+        <span id="score">0</span>
+
+        /
+
+        <span id="total">15</span>
+
+    </div>
+
+    <h2 id="level"></h2>
+
+    <p id="message"></p>
+
+    <button
+        class="whatsapp-btn"
+        onclick="openWhatsApp()">
+
+        GET MY LEARNING ROADMAP
+
+    </button>
+
+</div>
+
+
+<script>
+
+const submitted =
+    sessionStorage.getItem("studentSubmitted");
+
+
+// Security check:
+// Don't show score if the student hasn't submitted the form.
+
+if (submitted !== "true") {
+
+    window.location.href =
+        "result.html";
+
+}
+
+
+const score =
+    Number(sessionStorage.getItem("quizScore"));
+
+const total =
+    Number(sessionStorage.getItem("totalQuestions"));
+
+
+document.getElementById("score")
+.textContent = score;
+
+document.getElementById("total")
+.textContent = total;
+
+
+const percentage =
+    (score / total) * 100;
+
+
+let level = "";
+let message = "";
+
+
+if (percentage >= 80) {
+
+    level =
+        "EXCELLENT IT READINESS";
+
+    message =
+        "You have demonstrated strong IT fundamentals. Keep building your interview skills.";
+
+}
+
+else if (percentage >= 60) {
+
+    level =
+        "INTERVIEW READY";
+
+    message =
+        "You have a good foundation, but there are areas you can strengthen before interviews.";
+
+}
+
+else if (percentage >= 40) {
+
+    level =
+        "NEEDS IMPROVEMENT";
+
+    message =
+        "You have some good fundamentals. Strengthening your core IT skills can improve your interview readiness.";
+
+}
+
+else {
+
+    level =
+        "SKILLS NEED BUILDING";
+
+    message =
+        "This challenge identified several areas where you can strengthen your IT fundamentals.";
+
+}
+
+
+document.getElementById("level")
+.textContent = level;
+
+document.getElementById("message")
+.textContent = message;
+
+
+function openWhatsApp() {
+
+    const text =
+        encodeURIComponent(
+            "Hi, I completed the IT Skill Challenge and would like to receive my personalized learning roadmap."
+        );
+
+    window.open(
+        "https://wa.me/ 063795 03037?text=" + text,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
