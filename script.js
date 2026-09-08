@@ -1,4 +1,5 @@
-
 function startChallenge() {
-    alert("Challenge coming next!");
+
+    window.location.href = "quiz.html";
+
 }
