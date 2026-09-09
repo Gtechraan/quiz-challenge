@@ -11,7 +11,7 @@
 
 <div class="form-container">
 
-    <h1>Challenge Completed!</h1>
+    <h1>🎯 Challenge Completed!</h1>
 
     <p>
         Enter your details below to unlock your IT Skill Score.
@@ -56,16 +56,11 @@
         >
 
         <select id="graduation" required>
-
-            <option value="">
-                Select Graduation Year
-            </option>
-
+            <option value="">Select Graduation Year</option>
             <option>2026</option>
             <option>2027</option>
             <option>2028</option>
             <option>2029</option>
-
         </select>
 
         <button type="submit" class="submit-btn">
@@ -78,122 +73,58 @@
 
 </div>
 
-
 <script>
+    // Replace with your Google Apps Script URL when ready
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwQDohCn9U-JfsIZYWUF_UmKB1DgfwTrf716ON6EwEhMzjae05qEeqXaqeoVNFIEU7Lmg/exec";
+    document.getElementById("studentForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
+        const button = document.querySelector(".submit-btn");
+        button.disabled = true;
+        button.textContent = "SUBMITTING...";
 
-document.getElementById("studentForm")
-.addEventListener("submit", async function(event) {
+        const score = sessionStorage.getItem("quizScore");
+        const total = sessionStorage.getItem("totalQuestions");
+        const timeUsed = sessionStorage.getItem("timeUsed");
 
-    event.preventDefault();
+        const studentData = {
+            name: document.getElementById("name").value.trim(),
+            mobile: document.getElementById("mobile").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            college: document.getElementById("college").value.trim(),
+            department: document.getElementById("department").value.trim(),
+            graduation: document.getElementById("graduation").value,
+            score: score,
+            total: total,
+            timeUsed: timeUsed,
+            submittedAt: new Date().toLocaleString()
+        };
 
-    const button =
-        document.querySelector(".submit-btn");
+        try {
+            // If you have Google Apps Script URL, uncomment this
+            /*
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(studentData)
+            });
+            */
 
-    button.disabled = true;
+            // For now, just store in session and proceed
+            sessionStorage.setItem("studentSubmitted", "true");
+            window.location.href = "score.html";
 
-    button.textContent =
-        "SUBMITTING...";
-
-
-    // Get score stored after quiz
-    const score =
-        sessionStorage.getItem("quizScore");
-
-    const total =
-        sessionStorage.getItem("totalQuestions");
-
-    const timeUsed =
-        sessionStorage.getItem("timeUsed");
-
-
-    const studentData = {
-
-        name:
-            document.getElementById("name").value.trim(),
-
-        mobile:
-            document.getElementById("mobile").value.trim(),
-
-        email:
-            document.getElementById("email").value.trim(),
-
-        college:
-            document.getElementById("college").value.trim(),
-
-        department:
-            document.getElementById("department").value.trim(),
-
-        graduation:
-            document.getElementById("graduation").value,
-
-        score:
-            score,
-
-        total:
-            total,
-
-        timeUsed:
-            timeUsed,
-
-        submittedAt:
-            new Date().toLocaleString()
-
-    };
-
-
-    try {
-
-        await fetch(GOOGLE_SCRIPT_URL, {
-
-            method: "POST",
-
-            mode: "no-cors",
-
-            headers: {
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
-
-            body:
-                JSON.stringify(studentData)
-
-        });
-
-
-        // Score is displayed ONLY after form submission
-        // has completed its request.
-
-        sessionStorage.setItem(
-            "studentSubmitted",
-            "true"
-        );
-
-
-        window.location.href =
-            "score.html";
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        button.disabled = false;
-
-        button.textContent =
-            "UNLOCK MY SCORE";
-
-        document.getElementById("message")
-        .textContent =
-            "Something went wrong. Please try again.";
-
-    }
-
-});
-
+        } catch (error) {
+            console.error(error);
+            button.disabled = false;
+            button.textContent = "UNLOCK MY SCORE";
+            document.getElementById("message").textContent = "Something went wrong. Please try again.";
+        }
+    });
 </script>
 
 </body>
