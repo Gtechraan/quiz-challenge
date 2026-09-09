@@ -1,642 +1,603 @@
 /* ============================================ */
-/* RESET & BASE STYLES                         */
+// MASTER JAVASCRIPT - ALL PAGES
 /* ============================================ */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 80% 20%, #063b78, transparent 35%),
-        linear-gradient(135deg, #00183f, #00285f, #001438);
-    color: white;
-    min-height: 100vh;
-}
-
-/* ============================================ */
-/* MAIN PAGE - LANDING                        */
-/* ============================================ */
-
-.page {
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-/* HEADER */
-.header {
-    padding: 25px 5%;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.logo {
-    background: white;
-    color: #06366c;
-    padding: 12px 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 3px;
-    box-shadow: 5px 5px 0 #001536;
-}
-
-.logo-icon {
-    font-size: 38px;
-}
-
-.logo-name {
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.logo-name strong {
-    color: #f5a900;
-}
-
-.logo-subtitle {
-    font-size: 17px;
-    font-weight: 900;
-    margin-top: 4px;
-}
-
-/* HERO */
-.hero {
-    width: 92%;
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-.student-icon {
-    font-size: 60px;
-    margin-top: 10px;
-}
-
-.hero h2 {
-    font-size: clamp(45px, 8vw, 90px);
-    line-height: 0.9;
-    font-weight: 1000;
-    letter-spacing: -2px;
-    margin-bottom: 35px;
-}
-
-.pink {
-    color: #ff5dbd;
-    text-shadow: 3px 4px 0 #a60065;
-}
-
-.cyan {
-    color: #55e4ef;
-    text-shadow: 3px 4px 0 #007d96;
-}
-
-/* ONE QUESTION */
-.one-question {
-    display: inline-block;
-    padding: 15px 65px;
-    background: #18dce7;
-    color: #001746;
-    font-size: clamp(24px, 4vw, 40px);
-    font-weight: 1000;
-    transform: rotate(-1deg);
-    margin-bottom: 25px;
-    clip-path: polygon(2% 10%, 98% 0%, 96% 85%, 4% 100%);
-}
-
-/* INTERVIEW */
-.interview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.laptop {
-    font-size: 60px;
-}
-
-.interview p {
-    font-size: clamp(22px, 3.5vw, 40px);
-    font-weight: 1000;
-    line-height: 1.05;
-}
-
-/* READY */
-.ready-box {
-    width: 100%;
-    background: #18e2ed;
-    padding: 15px 20px;
-    margin: 15px auto 35px;
-    transform: rotate(-1deg);
-    clip-path: polygon(2% 15%, 97% 0%, 100% 78%, 96% 100%, 4% 90%, 0% 30%);
-}
-
-.ready-box h1 {
-    color: #001451;
-    font-size: clamp(50px, 9vw, 105px);
-    font-weight: 1000;
-    font-style: italic;
-    letter-spacing: -3px;
-    text-shadow: 4px 5px 0 #007b9b;
-}
-
-/* CHALLENGE TITLE */
-.challenge-title {
-    border: 4px solid #00eaff;
-    border-radius: 50px;
-    padding: 18px 30px;
-    width: 90%;
-    max-width: 800px;
-    margin: auto;
-    font-size: clamp(22px, 4vw, 38px);
-    font-weight: 900;
-    box-shadow: 0 0 15px rgba(0, 238, 255, 0.7);
-    line-height: 1.15;
-}
-
-.challenge-title span {
-    color: #ff62bd;
-}
-
-.challenge-title b {
-    color: #ff62bd;
-}
-
-/* START SECTION */
-.start-section {
-    margin: 35px auto 60px;
-}
-
-.start-label {
-    color: #5cecf4;
-    font-size: 18px;
-    font-weight: 900;
-    margin-bottom: 15px;
-}
-
-.start-button {
-    border: 4px solid #00efff;
-    border-radius: 60px;
-    padding: 20px 50px;
-    background: linear-gradient(135deg, #071c5a, #042b70);
-    color: #ff5fba;
-    font-size: clamp(20px, 3vw, 30px);
-    font-weight: 1000;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00eaff, 0 0 30px rgba(0, 234, 255, 0.5);
-    transition: 0.25s;
-}
-
-.start-button:hover {
-    transform: scale(1.07);
-    background: #00eaff;
-    color: #00154b;
-    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
-}
-
-.start-button:active {
-    transform: scale(0.98);
-}
-
-/* ============================================ */
-/* CONTACT INFO SECTION                        */
-/* ============================================ */
-
-.contact-info-section {
-    background: radial-gradient(circle at 30% 50%, #062b60, #000d24);
-    padding: 55px 5% 40px;
-    border-top: 3px solid #00eaff;
-}
-
-.contact-container {
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-.contact-heading {
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 1000;
-    margin-bottom: 35px;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(0, 20, 60, 0.6);
-    border: 2px solid #00eaff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    transition: 0.3s;
-    text-align: left;
-}
-
-.contact-item:hover {
-    background: rgba(0, 234, 255, 0.1);
-    box-shadow: 0 0 25px rgba(0, 234, 255, 0.25);
-    transform: translateY(-3px);
-}
-
-.contact-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-}
-
-.contact-label {
-    color: #55e4ef;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.contact-link {
-    color: #ff62bd;
-    font-size: 15px;
-    font-weight: 900;
-    text-decoration: none;
-    transition: 0.2s;
-    word-break: break-word;
-}
-
-.contact-link:hover {
-    color: #55e4ef;
-    text-decoration: underline;
-}
-
-.contact-footer {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid rgba(0, 234, 255, 0.2);
-}
-
-.contact-footer p {
-    color: #6688aa;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* ============================================ */
-/* QUIZ PAGE STYLES                           */
-/* ============================================ */
-
-.quiz-container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 25px;
-}
-
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.quiz-header span {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.timer {
-    font-size: 22px;
-    font-weight: bold;
-    color: #55e4ef;
-}
-
-.progress-container {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    margin-bottom: 30px;
-    overflow: hidden;
-}
-
-#progressBar {
-    height: 100%;
-    width: 6.66%;
-    background: linear-gradient(90deg, #55e4ef, #00eaff);
-    border-radius: 10px;
-    transition: width 0.5s ease;
-}
-
-.question-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    padding: 35px 30px;
-    border-radius: 15px;
-    border: 2px solid rgba(0, 234, 255, 0.3);
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-}
-
-.question-card h2 {
-    margin-bottom: 25px;
-    line-height: 1.5;
-    font-size: clamp(20px, 2.5vw, 28px);
-    color: #ffffff;
-}
-
-.option {
-    width: 100%;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    text-align: left;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    transition: 0.3s;
-}
-
-.option:hover {
-    border-color: #55e4ef;
-    background: rgba(85, 228, 239, 0.1);
-    transform: translateX(5px);
-}
-
-.option.selected {
-    border-color: #55e4ef;
-    background: rgba(85, 228, 239, 0.2);
-    box-shadow: 0 0 20px rgba(85, 228, 239, 0.2);
-}
-
-.next-btn {
-    margin-top: 20px;
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #00eaff, #007d96);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    letter-spacing: 1px;
-}
-
-.next-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
-}
-
-/* ============================================ */
-/* FORM PAGE STYLES                           */
-/* ============================================ */
-
-.form-container {
-    max-width: 520px;
-    margin: 60px auto;
-    padding: 45px 35px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 2px solid rgba(0, 234, 255, 0.3);
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-}
-
-.form-container h1 {
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: clamp(28px, 4vw, 38px);
-}
-
-.form-container p {
-    margin-bottom: 25px;
-    color: #88ccff;
-    text-align: center;
-    font-size: 16px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-input,
-select {
-    padding: 15px 18px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    font-size: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
-    transition: 0.3s;
-}
-
-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-input:focus,
-select:focus {
-    outline: none;
-    border-color: #55e4ef;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgba(85, 228, 239, 0.15);
-}
-
-select {
-    color: white;
-    appearance: none;
-    cursor: pointer;
-}
-
-select option {
-    background: #00183f;
-    color: white;
-}
-
-select option:first-child {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.submit-btn {
-    border: none;
-    padding: 16px 30px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #00eaff, #007d96);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    letter-spacing: 1px;
-    margin-top: 5px;
-}
-
-.submit-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
-}
-
-.submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-#message {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-/* ============================================ */
-/* SCORE PAGE STYLES                          */
-/* ============================================ */
-
-.score-container {
-    max-width: 600px;
-    margin: 80px auto;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(10px);
-    padding: 55px 35px 45px;
-    border-radius: 20px;
-    border: 2px solid rgba(0, 234, 255, 0.3);
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-}
-
-.success-icon {
-    font-size: 60px;
-    margin-bottom: 10px;
-}
-
-.score-container h1 {
-    font-size: clamp(28px, 4vw, 38px);
-    margin-bottom: 5px;
-}
-
-.score-number {
-    font-size: 65px;
-    font-weight: bold;
-    margin: 20px 0;
-    color: #55e4ef;
-    text-shadow: 0 0 30px rgba(85, 228, 239, 0.3);
-}
-
-.score-container h2 {
-    margin-bottom: 12px;
-    color: #ff62bd;
-    font-size: clamp(20px, 3vw, 28px);
-}
-
-.score-container p {
-    line-height: 1.7;
-    margin-bottom: 30px;
-    color: #88ccff;
-    font-size: 16px;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.whatsapp-btn {
-    border: none;
-    padding: 16px 35px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #25D366, #1da851);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    letter-spacing: 0.5px;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
-}
-
-/* ============================================ */
-/* RESPONSIVE                                  */
-/* ============================================ */
-
-@media (max-width: 900px) {
-    .contact-grid {
-        grid-template-columns: repeat(2, 1fr);
+// ============================================ //
+// 1. LANDING PAGE - index.html                 //
+// ============================================ //
+
+function startChallenge() {
+    window.location.href = "quiz.html";
+}
+
+
+// ============================================ //
+// 2. QUIZ PAGE - quiz.html                     //
+// ============================================ //
+
+// 15 IT Skill Questions
+const questions = [
+    {
+        question: "What is the output of this Python code? x = 10, y = 3, print(x // y)",
+        options: ["3.33", "3", "4", "1"],
+        answer: 1
+    },
+    {
+        question: "Which OOP concept allows a child class to acquire properties and methods of a parent class?",
+        options: ["Encapsulation", "Polymorphism", "Inheritance", "Abstraction"],
+        answer: 2
+    },
+    {
+        question: "What is the main purpose of exception handling?",
+        options: ["To increase program speed", "To handle runtime errors gracefully", "To create user interfaces", "To store database records"],
+        answer: 1
+    },
+    {
+        question: "Which SQL clause is used to filter rows based on a condition?",
+        options: ["ORDER BY", "WHERE", "GROUP BY", "JOIN"],
+        answer: 1
+    },
+    {
+        question: "Which JOIN returns only rows that have matching values in both tables?",
+        options: ["LEFT JOIN", "RIGHT JOIN", "FULL JOIN", "INNER JOIN"],
+        answer: 3
+    },
+    {
+        question: "What does SELECT MAX(Salary) FROM Employee return?",
+        options: ["The lowest salary", "The average salary", "The highest salary", "The total salary"],
+        answer: 2
+    },
+    {
+        question: "What is the main purpose of a primary key?",
+        options: ["To sort records", "To uniquely identify each row", "To delete duplicate tables", "To connect two databases"],
+        answer: 1
+    },
+    {
+        question: "A password must contain between 8 and 12 characters. Which set is best for boundary-value testing?",
+        options: ["1, 5, 15, 20", "7, 8, 12, 13", "8, 9, 10, 11", "5, 10, 15, 20"],
+        answer: 1
+    },
+    {
+        question: "A developer fixes a reported defect. What should the tester primarily perform first?",
+        options: ["Delete the defect", "Retest the specific defect", "Perform load testing", "Rewrite the test cases"],
+        answer: 1
+    },
+    {
+        question: "Which testing is performed after a change to ensure existing functionality still works?",
+        options: ["Regression Testing", "Smoke Testing", "Performance Testing", "Usability Testing"],
+        answer: 0
+    },
+    {
+        question: "Which HTTP method is generally used to retrieve data from a server?",
+        options: ["POST", "PUT", "GET", "DELETE"],
+        answer: 2
+    },
+    {
+        question: "What does HTTP status code 404 generally indicate?",
+        options: ["Successful request", "Unauthorized request", "Server error", "Resource not found"],
+        answer: 3
+    },
+    {
+        question: "A developer has committed changes locally and wants to upload them to a remote GitHub repository. Which command should be used?",
+        options: ["git pull", "git fetch", "git push", "git clone"],
+        answer: 2
+    },
+    {
+        question: "A company wants employees to use an application through a web browser without managing the underlying software infrastructure. Which cloud model fits best?",
+        options: ["IaaS", "PaaS", "SaaS", "On-premises"],
+        answer: 2
+    },
+    {
+        question: "A program takes 2 seconds to process 100 records. Assuming linear scaling, how long will it take to process 500 records?",
+        options: ["4 seconds", "6 seconds", "10 seconds", "20 seconds"],
+        answer: 2
     }
+];
+
+// Quiz State Variables
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 180; // 3 minutes in seconds
+let timerInterval = null;
+let answers = new Array(questions.length).fill(null);
+let isQuizFinished = false;
+
+// Load question when page loads
+if (document.getElementById('question')) {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadQuestion();
+        startTimer();
+    });
 }
 
-@media (max-width: 768px) {
-    .quiz-container {
-        margin: 30px 15px;
-        padding: 15px;
+// QUIZ FUNCTIONS
+
+function loadQuestion() {
+    if (isQuizFinished) return;
+    
+    const q = questions[currentQuestion];
+    
+    // Update question number
+    const questionNumber = document.getElementById("questionNumber");
+    if (questionNumber) {
+        questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
     }
     
-    .question-card {
-        padding: 25px 18px;
+    // Update question text
+    const questionEl = document.getElementById("question");
+    if (questionEl) {
+        questionEl.textContent = q.question;
     }
     
-    .form-container {
-        margin: 40px 20px;
-        padding: 35px 25px;
+    // Clear and load options
+    const optionsContainer = document.getElementById("options");
+    if (optionsContainer) {
+        optionsContainer.innerHTML = "";
+        
+        q.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.className = "option";
+            button.textContent = option;
+            button.dataset.index = index;
+            
+            // If this answer was previously selected, highlight it
+            if (answers[currentQuestion] === index) {
+                button.classList.add("selected");
+            }
+            
+            button.onclick = function() {
+                selectAnswer(index);
+            };
+            
+            optionsContainer.appendChild(button);
+        });
     }
     
-    .score-container {
-        margin: 50px 20px;
-        padding: 40px 25px;
+    // Update progress bar
+    updateProgress();
+}
+
+function selectAnswer(index) {
+    if (isQuizFinished) return;
+    
+    const optionButtons = document.querySelectorAll(".option");
+    
+    // Remove selected class from all options
+    optionButtons.forEach(button => {
+        button.classList.remove("selected");
+    });
+    
+    // Add selected class to clicked option
+    if (optionButtons[index]) {
+        optionButtons[index].classList.add("selected");
     }
     
-    .score-number {
-        font-size: 50px;
+    // Store the answer
+    answers[currentQuestion] = index;
+}
+
+function nextQuestion() {
+    if (isQuizFinished) return;
+    
+    // Check if an answer was selected
+    if (answers[currentQuestion] === null) {
+        showAlert("Please select an answer before continuing.");
+        return;
+    }
+    
+    currentQuestion++;
+    
+    // If all questions are answered, finish the quiz
+    if (currentQuestion >= questions.length) {
+        finishQuiz();
+        return;
+    }
+    
+    loadQuestion();
+}
+
+function calculateScore() {
+    score = 0;
+    for (let i = 0; i < questions.length; i++) {
+        if (answers[i] === questions[i].answer) {
+            score++;
+        }
+    }
+    return score;
+}
+
+function startTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        // Auto-submit when time runs out
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            finishQuiz();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const timerElement = document.getElementById("timer");
+    if (!timerElement) return;
+    
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerElement.textContent = 
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    
+    // Change color when time is running low
+    if (timeLeft <= 30) {
+        timerElement.style.color = "#ff5dbd";
+    } else {
+        timerElement.style.color = "#55e4ef";
     }
 }
 
-@media (max-width: 600px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
+function updateProgress() {
+    const progressBar = document.getElementById("progressBar");
+    if (!progressBar) return;
+    
+    const percentage = ((currentQuestion + 1) / questions.length) * 100;
+    progressBar.style.width = percentage + "%";
+}
+
+function finishQuiz() {
+    if (isQuizFinished) return;
+    
+    isQuizFinished = true;
+    
+    // Stop the timer
+    if (timerInterval) {
+        clearInterval(timerInterval);
     }
     
-    .contact-item {
-        padding: 14px 16px;
-    }
+    // Calculate score
+    calculateScore();
     
-    .form-container {
-        margin: 25px 12px;
-        padding: 25px 18px;
-    }
+    // Save to session storage
+    sessionStorage.setItem("quizScore", score);
+    sessionStorage.setItem("totalQuestions", questions.length);
+    sessionStorage.setItem("timeUsed", 180 - timeLeft);
     
-    .score-container {
-        margin: 30px 12px;
-        padding: 30px 18px;
+    // Navigate to result page
+    window.location.href = "result.html";
+}
+
+function showAlert(message) {
+    alert(message);
+}
+
+// Keyboard shortcut: Enter key to go to next question
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && document.getElementById('nextButton')) {
+        nextQuestion();
     }
+});
+
+
+// ============================================ //
+// 3. RESULT/FORM PAGE - result.html            //
+// ============================================ //
+
+// Google Apps Script URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+// Form submission handler
+if (document.getElementById('studentForm')) {
+    document.getElementById("studentForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const button = document.querySelector(".submit-btn");
+        const messageDiv = document.getElementById("message");
+
+        // Reset message
+        messageDiv.textContent = "";
+        messageDiv.style.padding = "0";
+        messageDiv.style.display = "block";
+
+        // Get form values
+        const name = document.getElementById("name").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const college = document.getElementById("college").value.trim();
+        const department = document.getElementById("department").value.trim();
+        const graduation = document.getElementById("graduation").value;
+
+        // === VALIDATION ===
+        if (!name || !mobile || !email || !college || !department || !graduation) {
+            messageDiv.textContent = "⚠️ Please fill in all fields.";
+            messageDiv.style.color = "#ff5dbd";
+            return;
+        }
+
+        if (mobile.length !== 10 || !/^[0-9]{10}$/.test(mobile)) {
+            messageDiv.textContent = "⚠️ Please enter a valid 10-digit mobile number.";
+            messageDiv.style.color = "#ff5dbd";
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            messageDiv.textContent = "⚠️ Please enter a valid email address.";
+            messageDiv.style.color = "#ff5dbd";
+            return;
+        }
+
+        // Get quiz data from session storage
+        const score = sessionStorage.getItem("quizScore") || "0";
+        const total = sessionStorage.getItem("totalQuestions") || "15";
+        const timeUsed = sessionStorage.getItem("timeUsed") || "0";
+
+        // Create student data object
+        const studentData = {
+            name: name,
+            mobile: mobile,
+            email: email,
+            college: college,
+            department: department,
+            graduation: graduation,
+            score: score,
+            total: total,
+            timeUsed: timeUsed,
+            submittedAt: new Date().toLocaleString('en-IN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            })
+        };
+
+        // Disable button and show loading
+        button.disabled = true;
+        button.textContent = "⏳ SUBMITTING...";
+        messageDiv.textContent = "⏳ Saving your data...";
+        messageDiv.style.color = "#55e4ef";
+
+        try {
+            // Send data to Google Apps Script
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(studentData)
+            });
+
+            // Check response
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Parse response
+            let result;
+            try {
+                result = await response.json();
+            } catch (parseError) {
+                console.warn("Response is not JSON, but request was sent successfully");
+                result = { success: true, message: "Data received" };
+            }
+
+            console.log("✅ Response from Google Script:", result);
+
+            // Handle success
+            if (result && result.success !== false) {
+                messageDiv.textContent = "✅ Data saved successfully!";
+                messageDiv.style.color = "#55e4ef";
+                
+                // Store submission status
+                sessionStorage.setItem("studentSubmitted", "true");
+                sessionStorage.setItem("studentName", name);
+                
+                // Redirect to score page
+                setTimeout(() => {
+                    window.location.href = "score.html";
+                }, 1000);
+                
+            } else {
+                throw new Error(result?.message || "Failed to save data");
+            }
+
+        } catch (error) {
+            // === ERROR HANDLING ===
+            console.error("❌ Submission error:", error);
+            
+            // Show error message
+            messageDiv.textContent = "⚠️ " + error.message;
+            messageDiv.style.color = "#ff5dbd";
+            
+            // Re-enable button
+            button.disabled = false;
+            button.textContent = "UNLOCK MY SCORE";
+        }
+    });
+}
+
+
+// ============================================ //
+// 4. SCORE PAGE - score.html                   //
+// ============================================ //
+
+// Score page handler
+if (document.getElementById('score')) {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Security check: Only show score if form was submitted
+        const submitted = sessionStorage.getItem("studentSubmitted");
+        
+        if (submitted !== "true") {
+            window.location.href = "result.html";
+            return;
+        }
+        
+        // Get data from session storage
+        const score = Number(sessionStorage.getItem("quizScore")) || 0;
+        const total = Number(sessionStorage.getItem("totalQuestions")) || 15;
+        
+        // Display score
+        const scoreElement = document.getElementById("score");
+        const totalElement = document.getElementById("total");
+        
+        if (scoreElement) scoreElement.textContent = score;
+        if (totalElement) totalElement.textContent = total;
+        
+        // Calculate percentage
+        const percentage = (score / total) * 100;
+        
+        // Determine level and message
+        let level = "";
+        let message = "";
+        let emoji = "";
+        
+        if (percentage >= 80) {
+            level = "EXCELLENT IT READINESS";
+            message = "You have demonstrated strong IT fundamentals. Keep building your interview skills.";
+            emoji = "🌟";
+        } else if (percentage >= 60) {
+            level = "INTERVIEW READY";
+            message = "You have a good foundation, but there are areas you can strengthen before interviews.";
+            emoji = "💪";
+        } else if (percentage >= 40) {
+            level = "NEEDS IMPROVEMENT";
+            message = "You have some good fundamentals. Strengthening your core IT skills can improve your interview readiness.";
+            emoji = "📚";
+        } else {
+            level = "SKILLS NEED BUILDING";
+            message = "This challenge identified several areas where you can strengthen your IT fundamentals.";
+            emoji = "🔧";
+        }
+        
+        // Display level and message
+        const levelElement = document.getElementById("level");
+        const messageElement = document.getElementById("message");
+        
+        if (levelElement) levelElement.textContent = `${emoji} ${level}`;
+        if (messageElement) messageElement.textContent = message;
+        
+        // Animate score counting up
+        animateScore(score);
+    });
+}
+
+function animateScore(targetScore) {
+    const scoreElement = document.getElementById("score");
+    if (!scoreElement) return;
     
-    .score-number {
-        font-size: 40px;
-    }
+    let currentScore = 0;
+    const duration = 1000; // 1 second
+    const steps = 20;
+    const increment = Math.ceil(targetScore / steps);
+    const intervalTime = duration / steps;
     
-    .start-button {
-        width: 90%;
-        padding: 17px 10px;
-        font-size: 20px;
+    const interval = setInterval(function() {
+        currentScore += increment;
+        
+        if (currentScore >= targetScore) {
+            currentScore = targetScore;
+            clearInterval(interval);
+        }
+        
+        scoreElement.textContent = currentScore;
+    }, intervalTime);
+}
+
+// WhatsApp function
+function openWhatsApp() {
+    const score = sessionStorage.getItem("quizScore") || 0;
+    const total = sessionStorage.getItem("totalQuestions") || 15;
+    const name = sessionStorage.getItem("studentName") || "Student";
+    
+    const message = encodeURIComponent(
+        `Hi, I completed the IT Skill Challenge and scored ${score}/${total}. I would like to receive my personalized learning roadmap.`
+    );
+    
+    // Replace with your actual WhatsApp number
+    const phoneNumber = "917987456321"; // India format without +
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+}
+
+
+// ============================================ //
+// 5. UTILITY FUNCTIONS                        //
+// ============================================ //
+
+function isMobileDevice() {
+    return window.innerWidth <= 768;
+}
+
+function smoothScrollTo(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 }
 
-@media (max-width: 400px) {
-    .contact-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 12px;
-        gap: 5px;
-    }
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
+
+function showToast(message, type = 'info') {
+    const colors = {
+        info: '#55e4ef',
+        success: '#25D366',
+        error: '#ff5dbd',
+        warning: '#f5a900'
+    };
+    
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background: rgba(0, 20, 60, 0.95);
+        border: 2px solid ${colors[type] || colors.info};
+        border-radius: 10px;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 9999;
+        max-width: 400px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        animation: slideIn 0.3s ease;
+    `;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Add toast animations
+const styleSheet = document.createElement("style");
+styleSheet.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100px); opacity: 0; }
+    }
+`;
+document.head.appendChild(styleSheet);
