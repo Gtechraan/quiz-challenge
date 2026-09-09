@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Skill Challenge</title>
+    <title>IT Skill Challenge - Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -42,396 +42,180 @@
 </div>
 
 <script>
+    const questions = [
+        {
+            question: "What is the output of this Python code? x = 10, y = 3, print(x // y)",
+            options: ["3.33", "3", "4", "1"],
+            answer: 1
+        },
+        {
+            question: "Which OOP concept allows a child class to acquire properties and methods of a parent class?",
+            options: ["Encapsulation", "Polymorphism", "Inheritance", "Abstraction"],
+            answer: 2
+        },
+        {
+            question: "What is the main purpose of exception handling?",
+            options: ["To increase program speed", "To handle runtime errors gracefully", "To create user interfaces", "To store database records"],
+            answer: 1
+        },
+        {
+            question: "Which SQL clause is used to filter rows based on a condition?",
+            options: ["ORDER BY", "WHERE", "GROUP BY", "JOIN"],
+            answer: 1
+        },
+        {
+            question: "Which JOIN returns only rows that have matching values in both tables?",
+            options: ["LEFT JOIN", "RIGHT JOIN", "FULL JOIN", "INNER JOIN"],
+            answer: 3
+        },
+        {
+            question: "What does SELECT MAX(Salary) FROM Employee return?",
+            options: ["The lowest salary", "The average salary", "The highest salary", "The total salary"],
+            answer: 2
+        },
+        {
+            question: "What is the main purpose of a primary key?",
+            options: ["To sort records", "To uniquely identify each row", "To delete duplicate tables", "To connect two databases"],
+            answer: 1
+        },
+        {
+            question: "A password must contain between 8 and 12 characters. Which set is best for boundary-value testing?",
+            options: ["1, 5, 15, 20", "7, 8, 12, 13", "8, 9, 10, 11", "5, 10, 15, 20"],
+            answer: 1
+        },
+        {
+            question: "A developer fixes a reported defect. What should the tester primarily perform first?",
+            options: ["Delete the defect", "Retest the specific defect", "Perform load testing", "Rewrite the test cases"],
+            answer: 1
+        },
+        {
+            question: "Which testing is performed after a change to ensure existing functionality still works?",
+            options: ["Regression Testing", "Smoke Testing", "Performance Testing", "Usability Testing"],
+            answer: 0
+        },
+        {
+            question: "Which HTTP method is generally used to retrieve data from a server?",
+            options: ["POST", "PUT", "GET", "DELETE"],
+            answer: 2
+        },
+        {
+            question: "What does HTTP status code 404 generally indicate?",
+            options: ["Successful request", "Unauthorized request", "Server error", "Resource not found"],
+            answer: 3
+        },
+        {
+            question: "A developer has committed changes locally and wants to upload them to a remote GitHub repository. Which command should be used?",
+            options: ["git pull", "git fetch", "git push", "git clone"],
+            answer: 2
+        },
+        {
+            question: "A company wants employees to use an application through a web browser without managing the underlying software infrastructure. Which cloud model fits best?",
+            options: ["IaaS", "PaaS", "SaaS", "On-premises"],
+            answer: 2
+        },
+        {
+            question: "A program takes 2 seconds to process 100 records. Assuming linear scaling, how long will it take to process 500 records?",
+            options: ["4 seconds", "6 seconds", "10 seconds", "20 seconds"],
+            answer: 2
+        }
+    ];
 
-const questions = [
+    let currentQuestion = 0;
+    let score = 0;
+    let timeLeft = 180;
+    let timerInterval = null;
+    let answers = new Array(questions.length).fill(null);
 
-    {
-        question: "What is the output of this Python code? x = 10, y = 3, print(x // y)",
-        options: [
-            "3.33",
-            "3",
-            "4",
-            "1"
-        ],
-        answer: 1
-    },
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById("questionNumber").textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        document.getElementById("question").textContent = q.question;
 
-    {
-        question: "Which OOP concept allows a child class to acquire properties and methods of a parent class?",
-        options: [
-            "Encapsulation",
-            "Polymorphism",
-            "Inheritance",
-            "Abstraction"
-        ],
-        answer: 2
-    },
+        const optionsContainer = document.getElementById("options");
+        optionsContainer.innerHTML = "";
 
-    {
-        question: "What is the main purpose of exception handling?",
-        options: [
-            "To increase program speed",
-            "To handle runtime errors gracefully",
-            "To create user interfaces",
-            "To store database records"
-        ],
-        answer: 1
-    },
+        q.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.className = "option";
+            button.textContent = option;
+            button.onclick = function() {
+                selectAnswer(index);
+            };
+            optionsContainer.appendChild(button);
+        });
 
-    {
-        question: "Which SQL clause is used to filter rows based on a condition?",
-        options: [
-            "ORDER BY",
-            "WHERE",
-            "GROUP BY",
-            "JOIN"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "Which JOIN returns only rows that have matching values in both tables?",
-        options: [
-            "LEFT JOIN",
-            "RIGHT JOIN",
-            "FULL JOIN",
-            "INNER JOIN"
-        ],
-        answer: 3
-    },
-
-    {
-        question: "What does SELECT MAX(Salary) FROM Employee return?",
-        options: [
-            "The lowest salary",
-            "The average salary",
-            "The highest salary",
-            "The total salary"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "What is the main purpose of a primary key?",
-        options: [
-            "To sort records",
-            "To uniquely identify each row",
-            "To delete duplicate tables",
-            "To connect two databases"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "A password must contain between 8 and 12 characters. Which set is best for boundary-value testing?",
-        options: [
-            "1, 5, 15, 20",
-            "7, 8, 12, 13",
-            "8, 9, 10, 11",
-            "5, 10, 15, 20"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "A developer fixes a reported defect. What should the tester primarily perform first?",
-        options: [
-            "Delete the defect",
-            "Retest the specific defect",
-            "Perform load testing",
-            "Rewrite the test cases"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "Which testing is performed after a change to ensure existing functionality still works?",
-        options: [
-            "Regression Testing",
-            "Smoke Testing",
-            "Performance Testing",
-            "Usability Testing"
-        ],
-        answer: 0
-    },
-
-    {
-        question: "Which HTTP method is generally used to retrieve data from a server?",
-        options: [
-            "POST",
-            "PUT",
-            "GET",
-            "DELETE"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "What does HTTP status code 404 generally indicate?",
-        options: [
-            "Successful request",
-            "Unauthorized request",
-            "Server error",
-            "Resource not found"
-        ],
-        answer: 3
-    },
-
-    {
-        question: "A developer has committed changes locally and wants to upload them to a remote GitHub repository. Which command should be used?",
-        options: [
-            "git pull",
-            "git fetch",
-            "git push",
-            "git clone"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "A company wants employees to use an application through a web browser without managing the underlying software infrastructure. Which cloud model fits best?",
-        options: [
-            "IaaS",
-            "PaaS",
-            "SaaS",
-            "On-premises"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "A program takes 2 seconds to process 100 records. Assuming linear scaling, how long will it take to process 500 records?",
-        options: [
-            "4 seconds",
-            "6 seconds",
-            "10 seconds",
-            "20 seconds"
-        ],
-        answer: 2
+        updateProgress();
     }
 
-];
-
-
-let currentQuestion = 0;
-let score = 0;
-let timeLeft = 180;
-let timerInterval = null;
-
-let answers = new Array(questions.length).fill(null);
-
-
-// -----------------------------
-// LOAD QUESTION
-// -----------------------------
-
-function loadQuestion() {
-
-    const q = questions[currentQuestion];
-
-    document.getElementById("questionNumber").textContent =
-        `Question ${currentQuestion + 1} of ${questions.length}`;
-
-    document.getElementById("question").textContent =
-        q.question;
-
-    const optionsContainer =
-        document.getElementById("options");
-
-    optionsContainer.innerHTML = "";
-
-    q.options.forEach((option, index) => {
-
-        const button = document.createElement("button");
-
-        button.className = "option";
-
-        button.textContent = option;
-
-        button.onclick = function () {
-            selectAnswer(index);
-        };
-
-        optionsContainer.appendChild(button);
-
-    });
-
-    updateProgress();
-
-}
-
-
-// -----------------------------
-// SELECT ANSWER
-// -----------------------------
-
-function selectAnswer(index) {
-
-    const optionButtons =
-        document.querySelectorAll(".option");
-
-    optionButtons.forEach(button => {
-        button.classList.remove("selected");
-    });
-
-    optionButtons[index].classList.add("selected");
-
-    answers[currentQuestion] = index;
-
-}
-
-
-// -----------------------------
-// NEXT QUESTION
-// -----------------------------
-
-function nextQuestion() {
-
-    if (answers[currentQuestion] === null) {
-
-        alert("Please select an answer before continuing.");
-
-        return;
+    function selectAnswer(index) {
+        const optionButtons = document.querySelectorAll(".option");
+        optionButtons.forEach(button => {
+            button.classList.remove("selected");
+        });
+        optionButtons[index].classList.add("selected");
+        answers[currentQuestion] = index;
     }
 
-    currentQuestion++;
+    function nextQuestion() {
+        if (answers[currentQuestion] === null) {
+            alert("Please select an answer before continuing.");
+            return;
+        }
 
-    if (currentQuestion >= questions.length) {
+        currentQuestion++;
+        if (currentQuestion >= questions.length) {
+            finishQuiz();
+            return;
+        }
+        loadQuestion();
+    }
 
-        finishQuiz();
+    function calculateScore() {
+        score = 0;
+        for (let i = 0; i < questions.length; i++) {
+            if (answers[i] === questions[i].answer) {
+                score++;
+            }
+        }
+        return score;
+    }
 
-        return;
+    function startTimer() {
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            updateTimer();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                finishQuiz();
+            }
+        }, 1000);
+    }
+
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById("timer").textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateProgress() {
+        const percentage = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById("progressBar").style.width = percentage + "%";
+    }
+
+    function finishQuiz() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+        }
+        calculateScore();
+        sessionStorage.setItem("quizScore", score);
+        sessionStorage.setItem("totalQuestions", questions.length);
+        sessionStorage.setItem("timeUsed", 180 - timeLeft);
+        window.location.href = "result.html";
     }
 
     loadQuestion();
-
-}
-
-
-// -----------------------------
-// CALCULATE SCORE
-// -----------------------------
-
-function calculateScore() {
-
-    score = 0;
-
-    for (let i = 0; i < questions.length; i++) {
-
-        if (answers[i] === questions[i].answer) {
-
-            score++;
-
-        }
-
-    }
-
-    return score;
-
-}
-
-
-// -----------------------------
-// TIMER
-// -----------------------------
-
-function startTimer() {
-
-    timerInterval = setInterval(function () {
-
-        timeLeft--;
-
-        updateTimer();
-
-        if (timeLeft <= 0) {
-
-            clearInterval(timerInterval);
-
-            finishQuiz();
-
-        }
-
-    }, 1000);
-
-}
-
-
-// -----------------------------
-// DISPLAY TIMER
-// -----------------------------
-
-function updateTimer() {
-
-    const minutes =
-        Math.floor(timeLeft / 60);
-
-    const seconds =
-        timeLeft % 60;
-
-    document.getElementById("timer").textContent =
-        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-}
-
-
-// -----------------------------
-// PROGRESS BAR
-// -----------------------------
-
-function updateProgress() {
-
-    const percentage =
-        ((currentQuestion + 1) / questions.length) * 100;
-
-    document.getElementById("progressBar").style.width =
-        percentage + "%";
-
-}
-
-
-// -----------------------------
-// FINISH QUIZ
-// -----------------------------
-
-function finishQuiz() {
-
-    if (timerInterval) {
-
-        clearInterval(timerInterval);
-
-    }
-
-    calculateScore();
-
-    sessionStorage.setItem(
-        "quizScore",
-        score
-    );
-
-    sessionStorage.setItem(
-        "totalQuestions",
-        questions.length
-    );
-
-    sessionStorage.setItem(
-        "timeUsed",
-        180 - timeLeft
-    );
-
-    window.location.href =
-        "result.html";
-
-}
-
-
-// -----------------------------
-// START
-// -----------------------------
-
-loadQuestion();
-
-startTimer();
-
+    startTimer();
 </script>
 
 </body>
