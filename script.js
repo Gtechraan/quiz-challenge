@@ -1,21 +1,17 @@
 /* ============================================ */
-// MASTER JAVASCRIPT - ALL PAGES
+// LANDING PAGE - INDEX.HTML
 /* ============================================ */
-
-// ============================================ //
-// 1. LANDING PAGE - index.html                 //
-// ============================================ //
 
 function startChallenge() {
     window.location.href = "quiz.html";
 }
 
 
-// ============================================ //
-// 2. QUIZ PAGE - quiz.html                     //
-// ============================================ //
+/* ============================================ */
+// QUIZ PAGE - QUIZ.HTML
+/* ============================================ */
 
-// 15 IT Skill Questions
+// All 15 IT skill questions
 const questions = [
     {
         question: "What is the output of this Python code? x = 10, y = 3, print(x // y)",
@@ -94,7 +90,7 @@ const questions = [
     }
 ];
 
-// Quiz State Variables
+// Quiz state variables
 let currentQuestion = 0;
 let score = 0;
 let timeLeft = 180; // 3 minutes in seconds
@@ -102,61 +98,56 @@ let timerInterval = null;
 let answers = new Array(questions.length).fill(null);
 let isQuizFinished = false;
 
-// Load question when page loads
-if (document.getElementById('question')) {
-    document.addEventListener('DOMContentLoaded', function() {
-        loadQuestion();
-        startTimer();
-    });
-}
+// Load question on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadQuestion();
+    startTimer();
+});
 
-// QUIZ FUNCTIONS
-
+/**
+ * Load the current question and options
+ */
 function loadQuestion() {
     if (isQuizFinished) return;
     
     const q = questions[currentQuestion];
     
     // Update question number
-    const questionNumber = document.getElementById("questionNumber");
-    if (questionNumber) {
-        questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-    }
+    document.getElementById("questionNumber").textContent = 
+        `Question ${currentQuestion + 1} of ${questions.length}`;
     
     // Update question text
-    const questionEl = document.getElementById("question");
-    if (questionEl) {
-        questionEl.textContent = q.question;
-    }
+    document.getElementById("question").textContent = q.question;
     
     // Clear and load options
     const optionsContainer = document.getElementById("options");
-    if (optionsContainer) {
-        optionsContainer.innerHTML = "";
+    optionsContainer.innerHTML = "";
+    
+    q.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+        button.dataset.index = index;
         
-        q.options.forEach((option, index) => {
-            const button = document.createElement("button");
-            button.className = "option";
-            button.textContent = option;
-            button.dataset.index = index;
-            
-            // If this answer was previously selected, highlight it
-            if (answers[currentQuestion] === index) {
-                button.classList.add("selected");
-            }
-            
-            button.onclick = function() {
-                selectAnswer(index);
-            };
-            
-            optionsContainer.appendChild(button);
-        });
-    }
+        // If this answer was previously selected, highlight it
+        if (answers[currentQuestion] === index) {
+            button.classList.add("selected");
+        }
+        
+        button.onclick = function() {
+            selectAnswer(index);
+        };
+        
+        optionsContainer.appendChild(button);
+    });
     
     // Update progress bar
     updateProgress();
 }
 
+/**
+ * Select an answer for the current question
+ */
 function selectAnswer(index) {
     if (isQuizFinished) return;
     
@@ -168,14 +159,15 @@ function selectAnswer(index) {
     });
     
     // Add selected class to clicked option
-    if (optionButtons[index]) {
-        optionButtons[index].classList.add("selected");
-    }
+    optionButtons[index].classList.add("selected");
     
     // Store the answer
     answers[currentQuestion] = index;
 }
 
+/**
+ * Move to the next question or finish the quiz
+ */
 function nextQuestion() {
     if (isQuizFinished) return;
     
@@ -196,6 +188,9 @@ function nextQuestion() {
     loadQuestion();
 }
 
+/**
+ * Calculate the final score
+ */
 function calculateScore() {
     score = 0;
     for (let i = 0; i < questions.length; i++) {
@@ -206,11 +201,10 @@ function calculateScore() {
     return score;
 }
 
+/**
+ * Start the timer countdown
+ */
 function startTimer() {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
-    
     timerInterval = setInterval(function() {
         timeLeft--;
         updateTimerDisplay();
@@ -223,16 +217,17 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Update the timer display
+ */
 function updateTimerDisplay() {
-    const timerElement = document.getElementById("timer");
-    if (!timerElement) return;
-    
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    timerElement.textContent = 
+    document.getElementById("timer").textContent = 
         `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     
     // Change color when time is running low
+    const timerElement = document.getElementById("timer");
     if (timeLeft <= 30) {
         timerElement.style.color = "#ff5dbd";
     } else {
@@ -240,14 +235,17 @@ function updateTimerDisplay() {
     }
 }
 
+/**
+ * Update the progress bar
+ */
 function updateProgress() {
-    const progressBar = document.getElementById("progressBar");
-    if (!progressBar) return;
-    
     const percentage = ((currentQuestion + 1) / questions.length) * 100;
-    progressBar.style.width = percentage + "%";
+    document.getElementById("progressBar").style.width = percentage + "%";
 }
 
+/**
+ * Finish the quiz and save results
+ */
 function finishQuiz() {
     if (isQuizFinished) return;
     
@@ -270,245 +268,219 @@ function finishQuiz() {
     window.location.href = "result.html";
 }
 
+/**
+ * Show alert message (customizable)
+ */
 function showAlert(message) {
     alert(message);
 }
 
 // Keyboard shortcut: Enter key to go to next question
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && document.getElementById('nextButton')) {
+    if (event.key === 'Enter') {
         nextQuestion();
     }
 });
 
 
-// ============================================ //
-// 3. RESULT/FORM PAGE - result.html            //
-// ============================================ //
+/* ============================================ */
+// RESULT/FORM PAGE - RESULT.HTML
+/* ============================================ */
 
-// Google Apps Script URL
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up form submission
+    const form = document.getElementById('studentForm');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+});
 
-// Form submission handler
-if (document.getElementById('studentForm')) {
-    document.getElementById("studentForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const button = document.querySelector(".submit-btn");
-        const messageDiv = document.getElementById("message");
-
-        // Reset message
-        messageDiv.textContent = "";
-        messageDiv.style.padding = "0";
-        messageDiv.style.display = "block";
-
-        // Get form values
-        const name = document.getElementById("name").value.trim();
-        const mobile = document.getElementById("mobile").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const college = document.getElementById("college").value.trim();
-        const department = document.getElementById("department").value.trim();
-        const graduation = document.getElementById("graduation").value;
-
-        // === VALIDATION ===
-        if (!name || !mobile || !email || !college || !department || !graduation) {
-            messageDiv.textContent = "⚠️ Please fill in all fields.";
-            messageDiv.style.color = "#ff5dbd";
-            return;
-        }
-
-        if (mobile.length !== 10 || !/^[0-9]{10}$/.test(mobile)) {
-            messageDiv.textContent = "⚠️ Please enter a valid 10-digit mobile number.";
-            messageDiv.style.color = "#ff5dbd";
-            return;
-        }
-
-        if (!email.includes('@') || !email.includes('.')) {
-            messageDiv.textContent = "⚠️ Please enter a valid email address.";
-            messageDiv.style.color = "#ff5dbd";
-            return;
-        }
-
-        // Get quiz data from session storage
-        const score = sessionStorage.getItem("quizScore") || "0";
-        const total = sessionStorage.getItem("totalQuestions") || "15";
-        const timeUsed = sessionStorage.getItem("timeUsed") || "0";
-
-        // Create student data object
-        const studentData = {
-            name: name,
-            mobile: mobile,
-            email: email,
-            college: college,
-            department: department,
-            graduation: graduation,
-            score: score,
-            total: total,
-            timeUsed: timeUsed,
-            submittedAt: new Date().toLocaleString('en-IN', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            })
-        };
-
-        // Disable button and show loading
-        button.disabled = true;
-        button.textContent = "⏳ SUBMITTING...";
-        messageDiv.textContent = "⏳ Saving your data...";
-        messageDiv.style.color = "#55e4ef";
-
-        try {
-            // Send data to Google Apps Script
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
+/**
+ * Handle form submission
+ */
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const button = document.querySelector(".submit-btn");
+    const messageDiv = document.getElementById("message");
+    
+    // Disable button and show loading state
+    button.disabled = true;
+    button.textContent = "SUBMITTING...";
+    messageDiv.textContent = "";
+    
+    // Get form values
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const college = document.getElementById("college").value.trim();
+    const department = document.getElementById("department").value.trim();
+    const graduation = document.getElementById("graduation").value;
+    
+    // Validate form
+    if (!name || !mobile || !email || !college || !department || !graduation) {
+        messageDiv.textContent = "Please fill in all fields.";
+        messageDiv.style.color = "#ff5dbd";
+        button.disabled = false;
+        button.textContent = "UNLOCK MY SCORE";
+        return;
+    }
+    
+    if (mobile.length !== 10 || !/^[0-9]{10}$/.test(mobile)) {
+        messageDiv.textContent = "Please enter a valid 10-digit mobile number.";
+        messageDiv.style.color = "#ff5dbd";
+        button.disabled = false;
+        button.textContent = "UNLOCK MY SCORE";
+        return;
+    }
+    
+    if (!email.includes('@') || !email.includes('.')) {
+        messageDiv.textContent = "Please enter a valid email address.";
+        messageDiv.style.color = "#ff5dbd";
+        button.disabled = false;
+        button.textContent = "UNLOCK MY SCORE";
+        return;
+    }
+    
+    // Get quiz data from session storage
+    const score = sessionStorage.getItem("quizScore");
+    const total = sessionStorage.getItem("totalQuestions");
+    const timeUsed = sessionStorage.getItem("timeUsed");
+    
+    // Create student data object
+    const studentData = {
+        name: name,
+        mobile: mobile,
+        email: email,
+        college: college,
+        department: department,
+        graduation: graduation,
+        score: score || 0,
+        total: total || 15,
+        timeUsed: timeUsed || 0,
+        submittedAt: new Date().toLocaleString('en-IN', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        })
+    };
+    
+    // Google Apps Script URL (replace with your actual URL)
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+    
+    try {
+        // Send data to Google Sheets (if URL is configured)
+        if (GOOGLE_SCRIPT_URL !== "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+            await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
-                mode: "cors",
+                mode: "no-cors",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "text/plain;charset=utf-8"
                 },
                 body: JSON.stringify(studentData)
             });
-
-            // Check response
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            // Parse response
-            let result;
-            try {
-                result = await response.json();
-            } catch (parseError) {
-                console.warn("Response is not JSON, but request was sent successfully");
-                result = { success: true, message: "Data received" };
-            }
-
-            console.log("✅ Response from Google Script:", result);
-
-            // Handle success
-            if (result && result.success !== false) {
-                messageDiv.textContent = "✅ Data saved successfully!";
-                messageDiv.style.color = "#55e4ef";
-                
-                // Store submission status
-                sessionStorage.setItem("studentSubmitted", "true");
-                sessionStorage.setItem("studentName", name);
-                
-                // Redirect to score page
-                setTimeout(() => {
-                    window.location.href = "score.html";
-                }, 1000);
-                
-            } else {
-                throw new Error(result?.message || "Failed to save data");
-            }
-
-        } catch (error) {
-            // === ERROR HANDLING ===
-            console.error("❌ Submission error:", error);
-            
-            // Show error message
-            messageDiv.textContent = "⚠️ " + error.message;
-            messageDiv.style.color = "#ff5dbd";
-            
-            // Re-enable button
-            button.disabled = false;
-            button.textContent = "UNLOCK MY SCORE";
-        }
-    });
-}
-
-
-// ============================================ //
-// 4. SCORE PAGE - score.html                   //
-// ============================================ //
-
-// Score page handler
-if (document.getElementById('score')) {
-    document.addEventListener('DOMContentLoaded', function() {
-        // Security check: Only show score if form was submitted
-        const submitted = sessionStorage.getItem("studentSubmitted");
-        
-        if (submitted !== "true") {
-            window.location.href = "result.html";
-            return;
-        }
-        
-        // Get data from session storage
-        const score = Number(sessionStorage.getItem("quizScore")) || 0;
-        const total = Number(sessionStorage.getItem("totalQuestions")) || 15;
-        
-        // Display score
-        const scoreElement = document.getElementById("score");
-        const totalElement = document.getElementById("total");
-        
-        if (scoreElement) scoreElement.textContent = score;
-        if (totalElement) totalElement.textContent = total;
-        
-        // Calculate percentage
-        const percentage = (score / total) * 100;
-        
-        // Determine level and message
-        let level = "";
-        let message = "";
-        let emoji = "";
-        
-        if (percentage >= 80) {
-            level = "EXCELLENT IT READINESS";
-            message = "You have demonstrated strong IT fundamentals. Keep building your interview skills.";
-            emoji = "🌟";
-        } else if (percentage >= 60) {
-            level = "INTERVIEW READY";
-            message = "You have a good foundation, but there are areas you can strengthen before interviews.";
-            emoji = "💪";
-        } else if (percentage >= 40) {
-            level = "NEEDS IMPROVEMENT";
-            message = "You have some good fundamentals. Strengthening your core IT skills can improve your interview readiness.";
-            emoji = "📚";
         } else {
-            level = "SKILLS NEED BUILDING";
-            message = "This challenge identified several areas where you can strengthen your IT fundamentals.";
-            emoji = "🔧";
+            // If no Google Script URL, just log the data
+            console.log("Student Data:", studentData);
         }
         
-        // Display level and message
-        const levelElement = document.getElementById("level");
-        const messageElement = document.getElementById("message");
+        // Store submission status
+        sessionStorage.setItem("studentSubmitted", "true");
         
-        if (levelElement) levelElement.textContent = `${emoji} ${level}`;
-        if (messageElement) messageElement.textContent = message;
+        // Navigate to score page
+        window.location.href = "score.html";
         
-        // Animate score counting up
-        animateScore(score);
-    });
+    } catch (error) {
+        console.error("Submission error:", error);
+        messageDiv.textContent = "Something went wrong. Please try again.";
+        messageDiv.style.color = "#ff5dbd";
+        button.disabled = false;
+        button.textContent = "UNLOCK MY SCORE";
+    }
 }
 
-function animateScore(targetScore) {
-    const scoreElement = document.getElementById("score");
-    if (!scoreElement) return;
+
+/* ============================================ */
+// SCORE PAGE - SCORE.HTML
+/* ============================================ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Security check: Only show score if form was submitted
+    const submitted = sessionStorage.getItem("studentSubmitted");
     
+    if (submitted !== "true") {
+        window.location.href = "result.html";
+        return;
+    }
+    
+    // Get data from session storage
+    const score = Number(sessionStorage.getItem("quizScore")) || 0;
+    const total = Number(sessionStorage.getItem("totalQuestions")) || 15;
+    
+    // Display score
+    document.getElementById("score").textContent = score;
+    document.getElementById("total").textContent = total;
+    
+    // Calculate percentage
+    const percentage = (score / total) * 100;
+    
+    // Determine level and message
+    let level = "";
+    let message = "";
+    let emoji = "";
+    
+    if (percentage >= 80) {
+        level = "EXCELLENT IT READINESS";
+        message = "You have demonstrated strong IT fundamentals. Keep building your interview skills.";
+        emoji = "🌟";
+    } else if (percentage >= 60) {
+        level = "INTERVIEW READY";
+        message = "You have a good foundation, but there are areas you can strengthen before interviews.";
+        emoji = "💪";
+    } else if (percentage >= 40) {
+        level = "NEEDS IMPROVEMENT";
+        message = "You have some good fundamentals. Strengthening your core IT skills can improve your interview readiness.";
+        emoji = "📚";
+    } else {
+        level = "SKILLS NEED BUILDING";
+        message = "This challenge identified several areas where you can strengthen your IT fundamentals.";
+        emoji = "🔧";
+    }
+    
+    // Display level and message with emoji
+    document.getElementById("level").textContent = `${emoji} ${level}`;
+    document.getElementById("message").textContent = message;
+    
+    // Add animation to score
+    animateScore();
+});
+
+/**
+ * Animate the score counting up
+ */
+function animateScore() {
+    const scoreElement = document.getElementById("score");
+    const targetScore = Number(sessionStorage.getItem("quizScore")) || 0;
     let currentScore = 0;
-    const duration = 1000; // 1 second
-    const steps = 20;
-    const increment = Math.ceil(targetScore / steps);
-    const intervalTime = duration / steps;
     
     const interval = setInterval(function() {
-        currentScore += increment;
+        currentScore++;
         
-        if (currentScore >= targetScore) {
+        if (currentScore > targetScore) {
             currentScore = targetScore;
             clearInterval(interval);
         }
         
         scoreElement.textContent = currentScore;
-    }, intervalTime);
+    }, Math.max(50, 500 / targetScore));
 }
 
-// WhatsApp function
+/**
+ * Open WhatsApp with pre-filled message
+ */
 function openWhatsApp() {
     const score = sessionStorage.getItem("quizScore") || 0;
     const total = sessionStorage.getItem("totalQuestions") || 15;
@@ -524,15 +496,49 @@ function openWhatsApp() {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 }
 
+/**
+ * Share result on social media
+ */
+function shareResult(platform) {
+    const score = sessionStorage.getItem("quizScore") || 0;
+    const total = sessionStorage.getItem("totalQuestions") || 15;
+    const text = `I scored ${score}/${total} on the G Tech Raan IT Skill Challenge! Can you beat my score? 🚀`;
+    const url = window.location.origin;
+    
+    let shareUrl = "";
+    
+    switch(platform) {
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+            break;
+        default:
+            return;
+    }
+    
+    window.open(shareUrl, "_blank");
+}
 
-// ============================================ //
-// 5. UTILITY FUNCTIONS                        //
-// ============================================ //
 
+/* ============================================ */
+// UTILITY FUNCTIONS - USED ACROSS ALL PAGES
+/* ============================================ */
+
+/**
+ * Check if user is on mobile device
+ */
 function isMobileDevice() {
     return window.innerWidth <= 768;
 }
 
+/**
+ * Smooth scroll to element
+ */
 function smoothScrollTo(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -543,12 +549,49 @@ function smoothScrollTo(elementId) {
     }
 }
 
+/**
+ * Format time in MM:SS
+ */
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
+/**
+ * Debounce function for performance
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+
+/* ============================================ */
+// ERROR HANDLING - GLOBAL
+/* ============================================ */
+
+// Handle uncaught errors
+window.onerror = function(message, source, lineno, colno, error) {
+    console.error("Global error:", { message, source, lineno, colno, error });
+    // You can send errors to a logging service here
+};
+
+// Handle unhandled promise rejections
+window.onunhandledrejection = function(event) {
+    console.error("Unhandled rejection:", event.reason);
+};
+
+/**
+ * Show a toast notification
+ */
 function showToast(message, type = 'info') {
     const colors = {
         info: '#55e4ef',
