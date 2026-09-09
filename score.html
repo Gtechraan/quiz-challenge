@@ -39,8 +39,8 @@
         window.location.href = "result.html";
     }
 
-    const score = Number(sessionStorage.getItem("quizScore"));
-    const total = Number(sessionStorage.getItem("totalQuestions"));
+    const score = Number(sessionStorage.getItem("quizScore")) || 0;
+    const total = Number(sessionStorage.getItem("totalQuestions")) || 15;
 
     document.getElementById("score").textContent = score;
     document.getElementById("total").textContent = total;
@@ -71,8 +71,8 @@
         const text = encodeURIComponent(
             "Hi, I completed the IT Skill Challenge and would like to receive my personalized learning roadmap."
         );
-        // Replace YOUR_NUMBER with actual WhatsApp number
-        window.open("https://wa.me/63795 03037?text=" + text, "_blank");
+        // Replace with your actual WhatsApp number
+        window.open("https://wa.me/917987456321?text=" + text, "_blank");
     }
 </script>
 
