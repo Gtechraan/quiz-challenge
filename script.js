@@ -369,11 +369,11 @@ async function handleFormSubmit(event) {
     };
     
     // Google Apps Script URL (replace with your actual URL)
-    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQDohCn9U-JfsIZYWUF_UmKB1DgfwTrf716ON6EwEhMzjae05qEeqXaqeoVNFIEU7Lmg/exec";
     
     try {
         // Send data to Google Sheets (if URL is configured)
-        if (GOOGLE_SCRIPT_URL !== "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+        if (GOOGLE_SCRIPT_URL !== "https://script.google.com/macros/s/AKfycbwQDohCn9U-JfsIZYWUF_UmKB1DgfwTrf716ON6EwEhMzjae05qEeqXaqeoVNFIEU7Lmg/exec") {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
@@ -491,7 +491,7 @@ function openWhatsApp() {
     );
     
     // Replace with your actual WhatsApp number
-    const phoneNumber = "917987456321"; // India format without +
+    const phoneNumber = " 063795 03037"; // India format without +
     
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 }
