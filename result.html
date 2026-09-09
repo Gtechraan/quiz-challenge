@@ -63,7 +63,7 @@
             <option>2029</option>
         </select>
 
-        <button type="submit" class="submit-btn" id="submitBtn">
+        <button type="submit" class="submit-btn">
             UNLOCK MY SCORE
         </button>
 
@@ -74,145 +74,57 @@
 </div>
 
 <script>
-// ============================================
-// ★★★ YOUR GOOGLE APPS SCRIPT URL ★★★
-// ============================================
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwHUds0ODkJaBSwSdDZH1LZ4bekyz612JJ1Cvj-a5cjHoCUeQ3zh_IxCQNcvJOaonu1/exec";
+    // Replace with your Google Apps Script URL when ready
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
-// ============================================
-// ★★★ FORM SUBMISSION - FULLY WORKING ★★★
-// ============================================
+    document.getElementById("studentForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-document.getElementById("studentForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+        const button = document.querySelector(".submit-btn");
+        button.disabled = true;
+        button.textContent = "SUBMITTING...";
 
-    const button = document.querySelector(".submit-btn");
-    const messageDiv = document.getElementById("message");
+        const score = sessionStorage.getItem("quizScore");
+        const total = sessionStorage.getItem("totalQuestions");
+        const timeUsed = sessionStorage.getItem("timeUsed");
 
-    // Reset message
-    messageDiv.textContent = "";
-    messageDiv.style.padding = "0";
-    messageDiv.style.display = "block";
+        const studentData = {
+            name: document.getElementById("name").value.trim(),
+            mobile: document.getElementById("mobile").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            college: document.getElementById("college").value.trim(),
+            department: document.getElementById("department").value.trim(),
+            graduation: document.getElementById("graduation").value,
+            score: score,
+            total: total,
+            timeUsed: timeUsed,
+            submittedAt: new Date().toLocaleString()
+        };
 
-    // === GET FORM VALUES ===
-    const name = document.getElementById("name").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const college = document.getElementById("college").value.trim();
-    const department = document.getElementById("department").value.trim();
-    const graduation = document.getElementById("graduation").value;
-
-    // === VALIDATION ===
-    if (!name || !mobile || !email || !college || !department || !graduation) {
-        messageDiv.textContent = "⚠️ Please fill in all fields.";
-        messageDiv.style.color = "#ff5dbd";
-        return;
-    }
-
-    if (mobile.length !== 10 || !/^[0-9]{10}$/.test(mobile)) {
-        messageDiv.textContent = "⚠️ Please enter a valid 10-digit mobile number.";
-        messageDiv.style.color = "#ff5dbd";
-        return;
-    }
-
-    if (!email.includes('@') || !email.includes('.')) {
-        messageDiv.textContent = "⚠️ Please enter a valid email address.";
-        messageDiv.style.color = "#ff5dbd";
-        return;
-    }
-
-    // === GET QUIZ DATA ===
-    const score = sessionStorage.getItem("quizScore");
-    const total = sessionStorage.getItem("totalQuestions");
-    const timeUsed = sessionStorage.getItem("timeUsed");
-
-    // === PREPARE DATA ===
-    const studentData = {
-        name: name,
-        mobile: mobile,
-        email: email,
-        college: college,
-        department: department,
-        graduation: graduation,
-        score: score || 0,
-        total: total || 15,
-        timeUsed: timeUsed || 0,
-        submittedAt: new Date().toLocaleString('en-IN', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        })
-    };
-
-    // Disable button and show loading
-    button.disabled = true;
-    button.textContent = "⏳ SUBMITTING...";
-    messageDiv.textContent = "⏳ Saving your data...";
-    messageDiv.style.color = "#55e4ef";
-
-    try {
-        // ============================================
-        // ★★★ SEND DATA TO GOOGLE APPS SCRIPT ★★★
-        // ============================================
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(studentData)
-        });
-
-        // === CHECK RESPONSE ===
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // === PARSE RESPONSE ===
-        let result;
         try {
-            result = await response.json();
-        } catch (parseError) {
-            console.warn("Response is not JSON, but request was sent successfully");
-            result = { success: true, message: "Data received" };
-        }
+            // If you have Google Apps Script URL, uncomment this
+            /*
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(studentData)
+            });
+            */
 
-        console.log("✅ Response from Google Script:", result);
-
-        // === HANDLE SUCCESS ===
-        if (result && result.success !== false) {
-            messageDiv.textContent = "✅ Data saved successfully!";
-            messageDiv.style.color = "#55e4ef";
-            
-            // Store submission status
+            // For now, just store in session and proceed
             sessionStorage.setItem("studentSubmitted", "true");
-            sessionStorage.setItem("studentName", name);
-            
-            // Redirect to score page
-            setTimeout(() => {
-                window.location.href = "score.html";
-            }, 1000);
-            
-        } else {
-            throw new Error(result?.message || "Failed to save data");
-        }
+            window.location.href = "score.html";
 
-    } catch (error) {
-        // === ERROR HANDLING ===
-        console.error("❌ Submission error:", error);
-        
-        // Show error message
-        messageDiv.textContent = "⚠️ " + error.message;
-        messageDiv.style.color = "#ff5dbd";
-        
-        // Re-enable button
-        button.disabled = false;
-        button.textContent = "UNLOCK MY SCORE";
-    }
-});
+        } catch (error) {
+            console.error(error);
+            button.disabled = false;
+            button.textContent = "UNLOCK MY SCORE";
+            document.getElementById("message").textContent = "Something went wrong. Please try again.";
+        }
+    });
 </script>
 
 </body>
