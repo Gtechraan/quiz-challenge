@@ -278,13 +278,6 @@ body {
     text-decoration: underline;
 }
 
-.contact-text {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    word-break: break-word;
-}
-
 .contact-footer {
     margin-top: 30px;
     padding-top: 20px;
@@ -403,10 +396,6 @@ body {
     box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
 }
 
-.next-btn:active {
-    transform: scale(0.98);
-}
-
 /* ============================================ */
 /* FORM PAGE STYLES                           */
 /* ============================================ */
@@ -498,10 +487,6 @@ select option:first-child {
     box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
 }
 
-.submit-btn:active {
-    transform: scale(0.98);
-}
-
 .submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -510,7 +495,6 @@ select option:first-child {
 #message {
     text-align: center;
     margin-top: 15px;
-    color: #ff62bd;
     font-weight: bold;
     font-size: 15px;
 }
@@ -549,10 +533,6 @@ select option:first-child {
     text-shadow: 0 0 30px rgba(85, 228, 239, 0.3);
 }
 
-.score-number span {
-    font-size: 65px;
-}
-
 .score-container h2 {
     margin-bottom: 12px;
     color: #ff62bd;
@@ -587,113 +567,68 @@ select option:first-child {
     box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
 }
 
-.whatsapp-btn:active {
-    transform: scale(0.97);
-}
-
 /* ============================================ */
-/* RESPONSIVE - LANDING PAGE                   */
-/* ============================================ */
-
-@media (max-width: 800px) {
-    .header {
-        justify-content: center;
-        padding: 20px 15px;
-    }
-
-    .logo {
-        transform: scale(0.9);
-    }
-
-    .hero {
-        width: 94%;
-    }
-
-    .student-icon {
-        font-size: 45px;
-    }
-
-    .one-question {
-        padding: 12px 40px;
-        font-size: clamp(20px, 4vw, 28px);
-    }
-
-    .interview {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .laptop {
-        font-size: 45px;
-    }
-
-    .challenge-title {
-        width: 100%;
-        padding: 15px;
-        border-radius: 30px;
-        font-size: clamp(18px, 3.5vw, 28px);
-    }
-
-    .start-button {
-        width: 90%;
-        padding: 17px 15px;
-        font-size: clamp(18px, 3vw, 24px);
-    }
-
-    .ready-box h1 {
-        font-size: clamp(40px, 8vw, 70px);
-    }
-}
-
-/* ============================================ */
-/* RESPONSIVE - CONTACT SECTION                */
+/* RESPONSIVE                                  */
 /* ============================================ */
 
 @media (max-width: 900px) {
     .contact-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        margin: 30px 15px;
+        padding: 15px;
+    }
+    
+    .question-card {
+        padding: 25px 18px;
+    }
+    
+    .form-container {
+        margin: 40px 20px;
+        padding: 35px 25px;
+    }
+    
+    .score-container {
+        margin: 50px 20px;
+        padding: 40px 25px;
+    }
+    
+    .score-number {
+        font-size: 50px;
     }
 }
 
 @media (max-width: 600px) {
-    .contact-info-section {
-        padding: 40px 4% 30px;
-    }
-
-    .contact-heading {
-        font-size: clamp(24px, 5vw, 32px);
-        margin-bottom: 25px;
-    }
-
     .contact-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
     }
-
+    
     .contact-item {
         padding: 14px 16px;
-        gap: 12px;
     }
-
-    .contact-icon {
-        font-size: 22px;
+    
+    .form-container {
+        margin: 25px 12px;
+        padding: 25px 18px;
     }
-
-    .contact-label {
-        font-size: 10px;
+    
+    .score-container {
+        margin: 30px 12px;
+        padding: 30px 18px;
     }
-
-    .contact-link {
-        font-size: 13px;
+    
+    .score-number {
+        font-size: 40px;
     }
-
-    .contact-text {
-        font-size: 13px;
-    }
-
-    .contact-footer p {
-        font-size: 12px;
+    
+    .start-button {
+        width: 90%;
+        padding: 17px 10px;
+        font-size: 20px;
     }
 }
 
@@ -704,279 +639,4 @@ select option:first-child {
         padding: 12px;
         gap: 5px;
     }
-
-    .contact-icon {
-        font-size: 24px;
-    }
-}
-
-/* ============================================ */
-/* RESPONSIVE - QUIZ PAGE                      */
-/* ============================================ */
-
-@media (max-width: 768px) {
-    .quiz-container {
-        margin: 30px 15px;
-        padding: 15px;
-    }
-
-    .quiz-header {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .quiz-header span {
-        font-size: 15px;
-    }
-
-    .timer {
-        font-size: 18px;
-    }
-
-    .question-card {
-        padding: 25px 18px;
-    }
-
-    .question-card h2 {
-        font-size: clamp(18px, 2.5vw, 22px);
-    }
-
-    .option {
-        padding: 14px 16px;
-        font-size: 14px;
-    }
-
-    .next-btn {
-        padding: 14px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .quiz-container {
-        margin: 15px 10px;
-        padding: 10px;
-    }
-
-    .question-card {
-        padding: 20px 14px;
-    }
-
-    .question-card h2 {
-        font-size: 17px;
-    }
-
-    .option {
-        padding: 12px 14px;
-        font-size: 13px;
-        margin: 6px 0;
-    }
-
-    .next-btn {
-        padding: 12px;
-        font-size: 13px;
-    }
-
-    .timer {
-        font-size: 16px;
-    }
-
-    .progress-container {
-        height: 6px;
-    }
-}
-
-/* ============================================ */
-/* RESPONSIVE - FORM PAGE                      */
-/* ============================================ */
-
-@media (max-width: 768px) {
-    .form-container {
-        margin: 40px 20px;
-        padding: 35px 25px;
-    }
-
-    .form-container h1 {
-        font-size: clamp(24px, 4vw, 32px);
-    }
-
-    .form-container p {
-        font-size: 14px;
-    }
-
-    input,
-    select {
-        padding: 13px 15px;
-        font-size: 14px;
-    }
-
-    .submit-btn {
-        padding: 14px 25px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .form-container {
-        margin: 25px 12px;
-        padding: 25px 18px;
-    }
-
-    .form-container h1 {
-        font-size: 22px;
-    }
-
-    .form-container p {
-        font-size: 13px;
-        margin-bottom: 18px;
-    }
-
-    input,
-    select {
-        padding: 12px 14px;
-        font-size: 13px;
-    }
-
-    .submit-btn {
-        padding: 13px 20px;
-        font-size: 13px;
-    }
-
-    #message {
-        font-size: 13px;
-    }
-}
-
-/* ============================================ */
-/* RESPONSIVE - SCORE PAGE                     */
-/* ============================================ */
-
-@media (max-width: 768px) {
-    .score-container {
-        margin: 50px 20px;
-        padding: 40px 25px;
-    }
-
-    .success-icon {
-        font-size: 45px;
-    }
-
-    .score-container h1 {
-        font-size: clamp(24px, 4vw, 32px);
-    }
-
-    .score-number {
-        font-size: 50px;
-    }
-
-    .score-number span {
-        font-size: 50px;
-    }
-
-    .score-container h2 {
-        font-size: clamp(18px, 3vw, 24px);
-    }
-
-    .score-container p {
-        font-size: 14px;
-        padding: 0 10px;
-    }
-
-    .whatsapp-btn {
-        padding: 14px 25px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .score-container {
-        margin: 30px 12px;
-        padding: 30px 18px;
-    }
-
-    .success-icon {
-        font-size: 35px;
-    }
-
-    .score-container h1 {
-        font-size: 22px;
-    }
-
-    .score-number {
-        font-size: 40px;
-        margin: 15px 0;
-    }
-
-    .score-number span {
-        font-size: 40px;
-    }
-
-    .score-container h2 {
-        font-size: 17px;
-    }
-
-    .score-container p {
-        font-size: 13px;
-        margin-bottom: 20px;
-    }
-
-    .whatsapp-btn {
-        padding: 12px 20px;
-        font-size: 13px;
-        width: 100%;
-    }
-}
-
-/* ============================================ */
-/* UTILITY & ANIMATIONS                       */
-/* ============================================ */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: #55e4ef;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #00eaff;
 }
