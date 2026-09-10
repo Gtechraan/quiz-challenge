@@ -211,6 +211,7 @@
         sessionStorage.setItem("quizScore", score);
         sessionStorage.setItem("totalQuestions", questions.length);
         sessionStorage.setItem("timeUsed", 180 - timeLeft);
+        sessionStorage.setItem("quizFinished", "true");   // ← ADD THIS LINE
         window.location.href = "result.html";
     }
 
