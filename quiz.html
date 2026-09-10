@@ -214,9 +214,12 @@
         sessionStorage.setItem("quizFinished", "true");   // ← ADD THIS LINE
         window.location.href = "result.html";
     }
-
-    loadQuestion();
-    startTimer();
+    if (sessionStorage.getItem("quizFinished") === "true") {
+        window.location.replace("index.html");
+    } else{
+        loadQuestion();
+        startTimer();
+    }
 </script>
 
 </body>
