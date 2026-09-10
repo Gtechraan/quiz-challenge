@@ -35,9 +35,9 @@
     const submitted = sessionStorage.getItem("studentSubmitted");
 
     // Security check: Don't show score if student hasn't submitted the form
-    if (submitted !== "true") {
-        window.location.href = "result.html";
-    }
+   if (submitted !== "true") {
+    window.location.replace("index.html");   // send to front page, not form
+}
 
     const score = Number(sessionStorage.getItem("quizScore"));
     const total = Number(sessionStorage.getItem("totalQuestions"));
@@ -72,7 +72,7 @@
             "Hi, I completed the IT Skill Challenge and would like to receive my personalized learning roadmap."
         );
         // Replace YOUR_NUMBER with actual WhatsApp number
-        window.open("https://wa.me/917987456321?text=" + text, "_blank");
+        window.open("https://wa.me/ 63795 03037?text=" + text, "_blank");
     }
 </script>
 
