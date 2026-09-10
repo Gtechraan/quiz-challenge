@@ -206,7 +206,7 @@
         document.getElementById("progressBar").style.width = percentage + "%";
     }
 
-    function finishQuiz() {
+       function finishQuiz() {
         if (timerInterval) {
             clearInterval(timerInterval);
         }
@@ -214,12 +214,55 @@
         sessionStorage.setItem("quizScore", score);
         sessionStorage.setItem("totalQuestions", questions.length);
         sessionStorage.setItem("timeUsed", 180 - timeLeft);
-        sessionStorage.setItem("quizFinished", "true");   // ← ADD THIS LINE
-        window.location.href = "result.html";
+        sessionStorage.setItem("quizFinished", "true");
+
+        // Clear in-progress markers so Back can never re-enter the quiz
+        sessionStorage.removeItem("quizInProgress");
+        sessionStorage.removeItem("quizCurrentQuestion");
+        sessionStorage.removeItem("quizTimeLeft");
+        sessionStorage.removeItem("quizAnswers");
+
+        // replace() removes quiz.html from history after finishing
+        window.location.replace("result.html");
     }
-    if (sessionStorage.getItem("quizFinished") === "true") {
-        window.location.replace("index.html");
-    } else{
+
+    function saveQuizState() {
+        sessionStorage.setItem("quizInProgress", "true");
+        sessionStorage.setItem("quizCurrentQuestion", currentQuestion);
+        sessionStorage.setItem("quizTimeLeft", timeLeft);
+        sessionStorage.setItem("quizAnswers", JSON.stringify(answers));
+    }
+
+    function restoreQuizState() {
+        currentQuestion = Number(sessionStorage.getItem("quizCurrentQuestion")) || 0;
+        timeLeft        = Number(sessionStorage.getItem("quizTimeLeft")) || 180;
+        const saved     = sessionStorage.getItem("quizAnswers");
+        answers         = saved ? JSON.parse(saved) : new Array(questions.length).fill(null);
+
+        // If they somehow finished all questions but flag wasn't set, force finish
+        if (currentQuestion >= questions.length) {
+            finishQuiz();
+        }
+    }
+
+    // ---- ENTRY LOGIC ----
+    const quizAlreadyFinished = sessionStorage.getItem("quizFinished") === "true";
+    const quizInProgress     = sessionStorage.getItem("quizInProgress") === "true";
+
+    if (quizAlreadyFinished) {
+        // Finished the quiz — never show questions again, go to form
+        window.location.replace("result.html");
+    } else if (quizInProgress) {
+        // Returning mid-quiz (browser Back) — restore exact state
+        restoreQuizState();
+        loadQuestion();
+        startTimer();
+    } else {
+        // Brand new attempt
+        currentQuestion = 0;
+        timeLeft = 180;
+        answers = new Array(questions.length).fill(null);
+        saveQuizState();
         loadQuestion();
         startTimer();
     }
