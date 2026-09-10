@@ -76,7 +76,15 @@
 <script>
     // Replace with your Google Apps Script URL when ready
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVECvPIRG3tjBimKsPMuKSPLeHH2o-MMG2mCJCLRVTEBhNF_hXm90XVCj6oOFeivwtIQ/exec";
+ // ---- GUARD 1: Only allow access if quiz was actually finished ----
+    if (sessionStorage.getItem("quizFinished") !== "true") {
+        window.location.replace("index.html");
+    }
 
+    // ---- GUARD 2: If already submitted, don't let them resubmit ----
+    if (sessionStorage.getItem("studentSubmitted") === "true") {
+        window.location.replace("score.html");
+    }
     document.getElementById("studentForm").addEventListener("submit", async function(event) {
         event.preventDefault();
 
