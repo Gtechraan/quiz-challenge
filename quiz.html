@@ -154,6 +154,7 @@
         });
         optionButtons[index].classList.add("selected");
         answers[currentQuestion] = index;
+        saveQuizState();
     }
 
     function nextQuestion() {
@@ -163,6 +164,7 @@
         }
 
         currentQuestion++;
+        saveQuizState();
         if (currentQuestion >= questions.length) {
             finishQuiz();
             return;
@@ -183,6 +185,7 @@
     function startTimer() {
         timerInterval = setInterval(function() {
             timeLeft--;
+            saveQuizState();
             updateTimer();
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
