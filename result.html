@@ -75,7 +75,7 @@
 
 <script>
     // Replace with your Google Apps Script URL when ready
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjtfULfm8wfCls1S_e_qF_ceNYOeQ58oG16hbFqf7lQn3TmiFaR8zbfRC4jP9gcodrqw/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVECvPIRG3tjBimKsPMuKSPLeHH2o-MMG2mCJCLRVTEBhNF_hXm90XVCj6oOFeivwtIQ/exec";
 
     document.getElementById("studentForm").addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -102,8 +102,6 @@
         };
 
         try {
-            // If you have Google Apps Script URL, uncomment this
-            
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
