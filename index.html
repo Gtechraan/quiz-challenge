@@ -171,7 +171,20 @@
     </section>
 
     <script>
-        function startChallenge() {
+       function startChallenge() {
+            // Reset any previous attempt so a returning student starts fresh
+            sessionStorage.removeItem("quizFinished");
+            sessionStorage.removeItem("studentSubmitted");
+            sessionStorage.removeItem("quizScore");
+            sessionStorage.removeItem("totalQuestions");
+            sessionStorage.removeItem("timeUsed");
+
+            // Clear in-progress markers so a new attempt doesn't resume old state
+            sessionStorage.removeItem("quizInProgress");
+            sessionStorage.removeItem("quizCurrentQuestion");
+            sessionStorage.removeItem("quizTimeLeft");
+            sessionStorage.removeItem("quizAnswers");
+
             window.location.href = "quiz.html";
         }
     </script>
